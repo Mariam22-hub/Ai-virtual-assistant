@@ -1,0 +1,161 @@
+{
+  "name": "O-Virtual-Assistant",
+  "displayName": "O-Virtual Assistant",
+  "publisher": "O-AI-Virtual-Assistant",
+  "description": "An AI Virtual Assistant",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.84.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "O-sidebar-view",
+          "title": "O",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "O-sidebar-view": [
+        {
+          "type": "webview",
+          "id": "O-sidebar",
+          "name": "O",
+          "icon": "media/heart.svg",
+          "contextualTitle": "O"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "O.AskO",
+        "category": "O",
+        "title": "Make a Query"
+      },
+      {
+        "command": "O.unitTest",
+        "category": "O",
+        "title": "Generate Unit Tests"
+      },
+      {
+        "command": "O.authenticate",
+        "category": "O",
+        "title": "Authenticate"
+      },
+      {
+        "command": "O.newChat",
+        "category": "O",
+        "title": "New Chat"
+      },
+      {
+        "command": "O.backToMenu",
+        "title": "Back to Menu",
+        "category": "O"
+      },
+      {
+        "command": "O.findCodeSmell",
+        "category": "O",
+        "title": "find Code Smell"
+      },
+      {
+        "command": "O.documentCode",
+        "category": "O",
+        "title": "Document Code"
+      },
+      {
+        "command": "O.explainCode",
+        "category": "O",
+        "title": "Explain Code"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "O.authenticate",
+          "when": "editorTextFocus",
+          "group": "navigation"
+        },
+        {
+          "command": "O.unitTest",
+          "when": "editorTextFocus",
+          "group": "navigation"
+        },
+        {
+          "command": "O.findCodeSmell",
+          "when": "editorTextFocus",
+          "group": "navigation"
+        },
+        {
+          "command": "O.documentCode",
+          "when": "editorTextFocus",
+          "group": "navigation"
+        },
+        {
+          "command": "O.explainCode",
+          "when": "editorTextFocus",
+          "group": "navigation"
+        },
+        {
+          "command": "O.newChat",
+          "when": "editorTextFocus",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "concurrently \"rollup -c -w\" \"webpack --watch\"",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@tsconfig/svelte": "^5.0.2",
+    "@types/mocha": "^10.0.3",
+    "@types/node": "18.x",
+    "@types/polka": "^0.5.7",
+    "@types/vscode": "^1.84.0",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "@vscode/test-electron": "^2.3.6",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.52.0",
+    "glob": "^10.3.10",
+    "mocha": "^10.2.0",
+    "rollup": "^2.3.4",
+    "rollup-plugin-svelte": "^6.0.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "svelte": "^4.2.8",
+    "svelte-check": "^3.6.2",
+    "svelte-preprocess": "^5.1.3",
+    "ts-loader": "^9.5.0",
+    "typescript": "^5.2.2",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "@types/highlight.js": "^10.1.0",
+    "@types/marked": "^6.0.0",
+    "dotenv": "^16.4.5",
+    "es6-promise": "^4.2.8",
+    "highlight.js": "^11.9.0",
+    "marked": "^13.0.0",
+    "openai": "^4.52.0",
+    "polka": "^0.5.2"
+  }
+}
